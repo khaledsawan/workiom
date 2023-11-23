@@ -64,27 +64,27 @@ void main() {
 
   group('FileImage Validation', () {
     test('Empty file returns error', () {
-      final fileImage = FileImage.dirty(null);
-      expect(fileImage.error, FileImageValidationError.empty);
+      final fileImage = FileChecker.dirty(null);
+      expect(fileImage.error, FileValidationError.empty);
     });
 
     test('Non-image file returns error', () {
-      final fileImage = FileImage.dirty(File('non_image.txt'));
-      expect(fileImage.error, FileImageValidationError.invalid);
+      final fileImage = FileChecker.dirty(File('non_image.txt'));
+      expect(fileImage.error, FileValidationError.invalid);
     });
 
     test('Large image file returns error', () {
       final largeImageFile = File('assets/image.png');
       // Assume the file is larger than 5MB (limit)
-      final fileImage = FileImage.dirty(largeImageFile);
-      expect(fileImage.error, FileImageValidationError.tooLarge);
+      final fileImage = FileChecker.dirty(largeImageFile);
+      expect(fileImage.error, FileValidationError.tooLarge);
     });
 
     test('Valid image file returns null', () {
       final imageFile = File('assets/sadf.text');
       // Assume the file is a valid image within the size limit
-      final fileImage = FileImage.dirty(imageFile);
-      expect(fileImage.error, FileImageValidationError.invalid);
+      final fileImage = FileChecker.dirty(imageFile);
+      expect(fileImage.error, FileValidationError.invalid);
     });
   });
 }

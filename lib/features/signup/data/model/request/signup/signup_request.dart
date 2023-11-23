@@ -7,14 +7,14 @@ import '../../../../../../core/base/base_model.dart';
 class SignUpRequest extends BaseModel<SignUpRequest> {
   final String? email;
   final String? password;
-  final File? image;
+  final File? metaData;
 
-  SignUpRequest({this.email, this.password, this.image});
+  SignUpRequest({this.email, this.password, this.metaData});
 
   factory SignUpRequest.fromJson(Map<String, dynamic> json) => SignUpRequest(
         email: json["email"],
         password: json["password"],
-        image: json["image"],
+        metaData: json["metaData"],
       );
 
   @override
@@ -26,14 +26,14 @@ class SignUpRequest extends BaseModel<SignUpRequest> {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['email'] = email;
     data['password'] = password;
-    data['image'] = image;
+    data['metaData'] = metaData;
     return data;
   }
 
   Future<FormData> formData() async {
     return FormData.fromMap({
-      'image': [
-        await MultipartFile.fromFile(image!.path, filename: image!.path)
+      'metaData': [
+        await MultipartFile.fromFile(metaData!.path, filename: metaData!.path)
       ],
       'password': password,
       'email': email,
@@ -41,5 +41,5 @@ class SignUpRequest extends BaseModel<SignUpRequest> {
   }
 
   @override
-  List<Object?> get props => [email, password, image];
+  List<Object?> get props => [email, password, metaData];
 }

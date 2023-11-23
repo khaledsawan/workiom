@@ -12,8 +12,8 @@ class ImageChange extends SignUpEvent {
 
   ImageChange({required this.image});
 }
-class ImageDeleted extends SignUpEvent {
-}
+
+class ImageDeleted extends SignUpEvent {}
 
 class EmailChange extends SignUpEvent {
   final String email;
@@ -22,6 +22,30 @@ class EmailChange extends SignUpEvent {
 }
 
 class EmailChangeUnFocus extends SignUpEvent {}
+
+class WorkSpaceChange extends SignUpEvent {
+  final String workSpace;
+
+  WorkSpaceChange({required this.workSpace});
+}
+
+class WorkSpaceChangeUnFocus extends SignUpEvent {}
+
+class FirstNameChange extends SignUpEvent {
+  final String firstName;
+
+  FirstNameChange({required this.firstName});
+}
+
+class FirstNameChangeUnFocus extends SignUpEvent {}
+
+class LastNameChange extends SignUpEvent {
+  final String lastName;
+
+  LastNameChange({required this.lastName});
+}
+
+class LastNameChangeUnFocus extends SignUpEvent {}
 
 class PasswordChange extends SignUpEvent {
   final String password;

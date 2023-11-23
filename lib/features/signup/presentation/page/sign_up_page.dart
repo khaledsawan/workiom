@@ -1,8 +1,6 @@
+import 'package:clean_architecture_flutter/features/signup/presentation/page/sign_up_first_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../bloc/sign_up_bloc.dart';
-import 'sign_up_form.dart';
 
 class SignUpPage extends StatefulWidget {
   SignUpPage({super.key});
@@ -14,11 +12,6 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) {
-        return SignUpBloc();
-      },
-      child: const SignUpForm(),
-    );
+    return const SignUpFirstPage();
   }
 }

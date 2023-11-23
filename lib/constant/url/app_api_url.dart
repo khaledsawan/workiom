@@ -8,7 +8,25 @@ class AppApiUrl {
   /*  for api   */
 
   //for base Uri
-  static const String BASE_URL ="http://api.workiom.site/";
+  static const String BASE_URL ="http://api.workiom.site";
+
+  //for GetCurrentLoginInformation
+  static const String GET_CURRENT_LOGIN_INFORMATION_URL = "/api/services/app/Session/GetCurrentLoginInformations";
+
+  //GetEditionsForSelect
+  static const String GET_EDITIONS_FOR_SELECT_URL = "/api/services/app/TenantRegistration/GetEditionsForSelect";
+
+  //GetPasswordComplexitySetting
+  static const String GET_PASSWORD_COMPLEXITY_SETTING_URL = "/api/services/app/Profile/GetPasswordComplexitySetting";
+
+  //IsTenantAvailable
+  static const String POST_IS_TENANT_AVAILABLE_URL = "/api/services/app/Account/IsTenantAvailable";
+
+  //RegisterTenant
+  static const String POST_REGISTER_TENANT_URL = "/api/services/app/TenantRegistration/RegisterTenant";
+
+  //Authenticate
+  static const String POST_AUTHENTICATE_URL = "/api/TokenAuth/Authenticate";
 
   //for student course
   static const String STUDENT_COURSES_URL = "/api/indexCoursesStudent";
@@ -32,4 +50,9 @@ class AppApiUrl {
   //for config
   static const String INTRO = "intro";
   static const String DARK_MODE = "darkmode";
+}
+class AppWebUrl{
+  static const String WEB_URL ="https://workiom.com";
+  static const String WEB_CONDITIONS_URL ="https://workiom.com/terms-conditions";
+  static const String WEB_POLICY_URL ="https://workiom.com/privacy-policy";
 }

@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:formz/formz.dart';
 import 'package:mime/mime.dart';
 
@@ -9,30 +8,44 @@ enum PasswordValidationError {
   short,
   noUpperCase,
   noLowerCase,
-  noDigit
+  noDigit,
 }
 
-class Password extends FormzInput<String, PasswordValidationError> {
-  const Password.pure() : super.pure('');
-  const Password.dirty([String value = '']) : super.dirty(value);
-
-  @override
-  PasswordValidationError? validator(String value) {
-    if (value.isEmpty) return PasswordValidationError.empty;
-    if (value.length < 8) return PasswordValidationError.short;
-
-    if (!value.contains(RegExp(r'[A-Z]')))
-      return PasswordValidationError.noUpperCase;
-    if (!value.contains(RegExp(r'[a-z]')))
-      return PasswordValidationError.noLowerCase;
-    if (!value.contains(RegExp(r'[0-9]')))
-      return PasswordValidationError.noDigit;
-
-    return null;
-  }
-}
+enum NameValidationError { empty }
 
 enum EmailValidationError { empty, invalid, noDomain }
+
+enum FileValidationError { empty, invalid, tooLarge }
+
+enum TenantNameValidationError { empty, invalid }
+
+class Password extends FormzInput<String, List<ValidationError>> {
+  const Password.pure() : super.pure('');
+  const Password.dirty([String value = '']) : super.dirty(value);
+  List<ValidationError> _validator(String value) {
+    int requiredLength = 7;
+
+    return [
+      ValidationError('Password must have at least 7 characters.',
+          value.length < requiredLength),
+      ValidationError(
+          'Password must have at least one uppercase (\'A\'-\'Z\').',
+          !value.contains(RegExp(r'[A-Z]'))),
+      ValidationError(
+          'Password must have at least one lowercase (\'A\'-\'Z\').',
+          !value.contains(RegExp(r'[a-z]'))),
+      ValidationError('Password must have at least one digit.',
+          !value.contains(RegExp(r'[0-9]'))),
+      ValidationError('Password must have at least one special character.',
+          !value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))),
+    ];
+  }
+
+  @override
+  List<ValidationError> validator(String value) {
+    return _validator(value);
+  }
+}
 
 class Email extends FormzInput<String, EmailValidationError> {
   const Email.pure() : super.pure('');
@@ -51,30 +64,29 @@ class Email extends FormzInput<String, EmailValidationError> {
   }
 }
 
-enum FileImageValidationError { empty, invalid, tooLarge }
-
-class FileImage extends FormzInput<File?, FileImageValidationError> {
-  const FileImage.pure() : super.pure(null);
-  const FileImage.dirty([File? value]) : super.dirty(value);
+class Name extends FormzInput<String, NameValidationError> {
+  const Name.pure() : super.pure('');
+  const Name.dirty([String value = '']) : super.dirty(value);
 
   @override
-  FileImageValidationError? validator(File? value) {
-    if (value == null) return FileImageValidationError.empty;
-    final mimeType = lookupMimeType(value.path);
-
-    if (mimeType != null && mimeType.startsWith('image')) {
-      // Additional validation for image size (e.g., 5MB limit)
-      if (value.lengthSync() > 5 * 1024 * 1024)
-        return FileImageValidationError.tooLarge;
-      return null;
-    } else {
-      return FileImageValidationError.invalid;
-    }
+  NameValidationError? validator(String value) {
+    if (value.isEmpty) return NameValidationError.empty;
+    return null;
   }
 }
 
+class FileChecker extends FormzInput<File?, FileValidationError> {
+  const FileChecker.pure() : super.pure(null);
+  const FileChecker.dirty([File? value]) : super.dirty(value);
 
-enum TenantNameValidationError { empty, invalid }
+  @override
+  FileValidationError? validator(File? value) {
+    if (value == null) return FileValidationError.empty;
+    final mimeType = lookupMimeType(value.path);
+    if (mimeType != null) return null;
+    return FileValidationError.invalid;
+  }
+}
 
 class TenantName extends FormzInput<String, TenantNameValidationError> {
   const TenantName.pure() : super.pure('');
@@ -90,4 +102,12 @@ class TenantName extends FormzInput<String, TenantNameValidationError> {
   }
 }
 
+class ValidationError {
+  final String? error;
+  final bool? value;
 
+  ValidationError(
+    this.error,
+    this.value,
+  );
+}

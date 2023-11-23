@@ -31,7 +31,6 @@ class SignUpRepositoryImp extends MainRepository implements SignUpRepository {
     );
     return result.fold(
       (failure) {
-        print(failure);
         return Left(failure);
       },
       (authResponse) => Right(authResponse),

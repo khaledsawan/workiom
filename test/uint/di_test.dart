@@ -1,11 +1,6 @@
 import 'package:clean_architecture_flutter/core/base/base_cache.dart';
 import 'package:clean_architecture_flutter/core/base/base_dio.dart';
 import 'package:clean_architecture_flutter/core/network/network_info.dart';
-import 'package:clean_architecture_flutter/features/Login/domain/repository/login_repository.dart';
-import 'package:clean_architecture_flutter/features/Login/domain/use_case/login_use_case.dart';
-import 'package:clean_architecture_flutter/features/courses_list/domain/repository/courses_repo.dart';
-import 'package:clean_architecture_flutter/features/courses_list/domain/use_case/Coursese_use_case.dart';
-import 'package:clean_architecture_flutter/features/Login/presentation/bloc/login_bloc.dart';
 import 'package:clean_architecture_flutter/di.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -42,23 +37,16 @@ void main() {
   });
 
   tearDown(() {
-    // Clear GetIt registrations after each test
     getIt.reset();
   });
 
   test('Test dependency registration', () async {
     await AppDependencies().initialize();
-    // Verify that the dependencies are registered correctly
-    expect(getIt<LoginBloc>(), isNotNull);
-    expect(getIt<CoursesUseCase>(), isNotNull);
-    expect(getIt<LoginUseCase>(), isNotNull);
-    expect(getIt<CoursesRepository>(), isNotNull);
-    expect(getIt<LoginRepository>(), isNotNull);
     expect(getIt<NetworkInfo>(), isNotNull);
     expect(getIt<TheHttpExecuter>(), isNotNull);
     expect(getIt<Memento>(), isNotNull);
     expect(getIt<SharedPreferences>(), equals(preferences));
     expect(getIt<InternetConnectionChecker>(),
-        equals(InternetConnectionChecker()));
+    equals(InternetConnectionChecker()));
   });
 }

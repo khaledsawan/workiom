@@ -1,4 +1,4 @@
-import 'package:clean_architecture_flutter/features/signup/presentation/page/sign_up_first_page.dart';
+import 'sign_up_first_page.dart';
 import 'package:flutter/material.dart';
 
 

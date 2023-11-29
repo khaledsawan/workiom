@@ -1,4 +1,4 @@
-import 'package:clean_architecture_flutter/component/text/very_small_text.dart';
+import '../../../../component/text/very_small_text.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../component/appbar/defualt_appbar.dart';
 import '../../../../component/buttom/google_btn.dart';

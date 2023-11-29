@@ -1,8 +1,8 @@
-import 'package:clean_architecture_flutter/component/input_text_form.dart/text_form_filed.dart';
-import 'package:clean_architecture_flutter/component/text/small_text.dart';
-import 'package:clean_architecture_flutter/component/validation%20list/valication_error_list.dart';
-import 'package:clean_architecture_flutter/constant/color/colors.dart';
-import 'package:clean_architecture_flutter/features/common_forms/common_form.dart';
+import '../../../../component/input_text_form.dart/text_form_filed.dart';
+import '../../../../component/text/small_text.dart';
+import '../../../../component/validation%20list/valication_error_list.dart';
+import '../../../../constant/color/colors.dart';
+import '../../../common_forms/common_form.dart';
 import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../component/appbar/defualt_appbar.dart';

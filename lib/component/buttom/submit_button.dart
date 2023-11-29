@@ -1,4 +1,4 @@
-import 'package:clean_architecture_flutter/constant/color/colors.dart';
+import '../../constant/color/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 

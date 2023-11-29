@@ -1,5 +1,5 @@
-import 'package:clean_architecture_flutter/component/text/small_text.dart';
-import 'package:clean_architecture_flutter/component/text/very_small_text.dart';
+import '../text/small_text.dart';
+import '../text/very_small_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../features/common_forms/common_form.dart';

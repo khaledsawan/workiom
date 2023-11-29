@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 
 import '../../../../../../../core/base/base_model.dart';
-import '../../../../../../core/base/base_model.dart';
 
 class SignUpRequest extends BaseModel<SignUpRequest> {
   final String? email;

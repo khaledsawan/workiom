@@ -1,15 +1,16 @@
-import '../../../../component/input_text_form.dart/text_form_filed.dart';
-import '../../../../component/text/small_text.dart';
-import '../../../../component/validation%20list/valication_error_list.dart';
-import '../../../../constant/color/colors.dart';
-import '../../../common_forms/common_form.dart';
+import '../../../../../component/appbar/defualt_appbar.dart';
+import '../../../../../component/buttom/submit_button.dart';
+import '../../../../../component/input_text_form.dart/text_form_filed.dart';
+import '../../../../../component/page_sections/first_section.dart';
+import '../../../../../component/stay_organized_component/stay_component.dart';
+import '../../../../../component/text/small_text.dart';
+import '../../../../../component/validation list/valication_error_list.dart';
+import '../../../../../constant/color/colors.dart';
+import '../../../../../route/app_routes.dart';
+import '../../../../common_forms/common_form.dart';
 import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../component/appbar/defualt_appbar.dart';
-import '../../../../component/buttom/submit_button.dart';
-import '../../../../component/page_sections/first_section.dart';
-import '../../../../component/stay_organized_component/stay_component.dart';
-import '../../../../route/app_routes.dart';
+
 import '../bloc/sign_up_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

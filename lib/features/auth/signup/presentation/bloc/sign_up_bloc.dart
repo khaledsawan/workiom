@@ -2,8 +2,9 @@ import 'dart:io';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
-import '../../../../di.dart';
-import '../../../common_forms/common_form.dart';
+
+import '../../../../../di.dart';
+import '../../../../common_forms/common_form.dart';
 import '../../data/model/request/signup/signup_request.dart';
 import '../../domain/use_case/signup_use_case.dart';
 

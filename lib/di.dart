@@ -4,10 +4,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'core/base/base_cache.dart';
 import 'core/base/base_dio.dart';
 import 'core/network/network_info.dart';
-import 'features/signup/data/repository/signup_repository_imp.dart/signup_repo.dart';
-import 'features/signup/domain/repository/signup_repository.dart';
-import 'features/signup/domain/use_case/signup_use_case.dart';
-import 'features/signup/presentation/bloc/sign_up_bloc.dart';
+import 'features/auth/signup/data/repository/signup_repository_imp.dart/signup_repo.dart';
+import 'features/auth/signup/domain/repository/signup_repository.dart';
+import 'features/auth/signup/domain/use_case/signup_use_case.dart';
+import 'features/auth/signup/presentation/bloc/sign_up_bloc.dart';
 
 final GetIt getIt = GetIt.instance;
 

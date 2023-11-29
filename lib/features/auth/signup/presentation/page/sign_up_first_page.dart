@@ -1,14 +1,15 @@
-import '../../../../component/text/very_small_text.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../component/appbar/defualt_appbar.dart';
-import '../../../../component/buttom/google_btn.dart';
-import '../../../../component/buttom/submit_button.dart';
-import '../../../../component/drop_language/drop_language.dart';
-import '../../../../component/page_sections/first_section.dart';
-import '../../../../component/stay_organized_component/stay_component.dart';
-import '../../../../component/condesion_policy/condesion_terms.dart';
-import '../../../../route/app_routes.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../component/appbar/defualt_appbar.dart';
+import '../../../../../component/buttom/google_btn.dart';
+import '../../../../../component/buttom/submit_button.dart';
+import '../../../../../component/condesion_policy/condesion_terms.dart';
+import '../../../../../component/drop_language/drop_language.dart';
+import '../../../../../component/page_sections/first_section.dart';
+import '../../../../../component/stay_organized_component/stay_component.dart';
+import '../../../../../component/text/very_small_text.dart';
+import '../../../../../route/app_routes.dart';
 
 class SignUpFirstPage extends StatefulWidget {
   const SignUpFirstPage({super.key});

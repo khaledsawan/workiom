@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../features/Home/presentation/pages/home_screen.dart';
-import '../features/signup/presentation/page/sign_up_first_page.dart';
-import '../features/signup/presentation/page/sign_up_page.dart';
-import '../features/signup/presentation/page/sign_up_sec_page.dart';
-import '../features/signup/presentation/page/sign_up_third_page.dart';
+import '../features/auth/signup/presentation/page/sign_up_first_page.dart';
+import '../features/auth/signup/presentation/page/sign_up_page.dart';
+import '../features/auth/signup/presentation/page/sign_up_sec_page.dart';
+import '../features/auth/signup/presentation/page/sign_up_third_page.dart';
 
 class AppRoutes {
   static const home = 'home';

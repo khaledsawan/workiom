@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'features/signup/presentation/bloc/sign_up_bloc.dart';
+import 'features/auth/signup/presentation/bloc/sign_up_bloc.dart';
 import 'route/app_routes.dart';
 
 class App extends StatelessWidget {

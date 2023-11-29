@@ -158,7 +158,8 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     emit(
       state.copyWith(
         password: password,
-        isValid: Formz.validate([state.email, state.workSpace, state.firstName, state.lastName]),
+        isValid: Formz.validate(
+            [state.email, state.workSpace, state.firstName, state.lastName]),
       ),
     );
   }
@@ -171,7 +172,8 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     emit(
       state.copyWith(
         password: password,
-        isValid: Formz.validate([state.email, state.workSpace, state.firstName, state.lastName]),
+        isValid: Formz.validate(
+            [state.email, state.workSpace, state.firstName, state.lastName]),
       ),
     );
   }
@@ -192,7 +194,8 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
         workSpace: workSpace,
         firstName: firstName,
         lastName: lastName,
-        isValid: Formz.validate([email, password, workSpace, firstName, lastName]),
+        isValid:
+            Formz.validate([email, password, workSpace, firstName, lastName]),
       ),
     );
     if (state.isValid) {

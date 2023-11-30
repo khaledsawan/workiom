@@ -28,9 +28,6 @@ class AppApiUrl {
   //Authenticate
   static const String POST_AUTHENTICATE_URL = "/api/TokenAuth/Authenticate";
 
-  //for student course
-  static const String STUDENT_COURSES_URL = "/api/indexCoursesStudent";
-
   //for Auth
   static const String LOGIN_URL = "/api/login";
   static const String SIGNUP_URL = "/api/signup";

@@ -1,11 +1,16 @@
 import 'dart:io';
+import 'package:clean_architecture_flutter/features/auth/signup/data/model/request/password/password_request.dart';
+import 'package:clean_architecture_flutter/features/auth/signup/data/model/request/tenant/tenant_request.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
-
+import '../../../../../core/usecases/usecase.dart';
 import '../../../../../di.dart';
 import '../../../../common_forms/common_form.dart';
 import '../../data/model/request/signup/signup_request.dart';
+import '../../domain/use_case/get_edition_use_case.dart';
+import '../../domain/use_case/isTenant_available_use_vase.dart';
+import '../../domain/use_case/password_validation_use_case.dart';
 import '../../domain/use_case/signup_use_case.dart';
 
 part 'sign_up_event.dart';
@@ -13,8 +18,12 @@ part 'sign_up_state.dart';
 
 class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   final signUpUseCase = SignUpUseCase(getIt());
-
+  final passwordValidation = PasswordValidationUseCase(getIt());
+  final isTenantAvailableUseCase = IsTenantAvailableUseCase(getIt());
+  final getEditionUseCase = GetEditionUseCase(getIt());
+  late int editionId;
   SignUpBloc() : super(const SignUpState()) {
+    _getEditions();
     on<SignUpButtonPressed>(_onSubmitted);
     on<EmailChange>(_onEmailChanged);
     on<EmailChangeUnFocus>(_onEmailUnfocused);
@@ -26,6 +35,10 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     on<FirstNameChangeUnFocus>(_onFirstNameUnfocused);
     on<PasswordChange>(_onPasswordChanged);
     on<PasswordChangeUnFocus>(_onPasswordUnfocused);
+  }
+  Future<void> _getEditions() async {
+    final data = await getEditionUseCase.call(NoParams());
+    data.fold((l) => _getEditions(), (r) => editionId = r.id!);
   }
 
   void _onEmailChanged(EmailChange event, Emitter<SignUpState> emit) {
@@ -60,6 +73,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
 
   void _onWorkSpaceChanged(WorkSpaceChange event, Emitter<SignUpState> emit) {
     final workSpace = Name.dirty(event.workSpace);
+    _onIsTenantAvailable(emit);
     emit(
       state.copyWith(
         workSpace: workSpace.isValid ? workSpace : Name.dirty(event.workSpace),
@@ -155,6 +169,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     PasswordChange event,
     Emitter<SignUpState> emit,
   ) {
+    _onPasswordValidation(emit);
     final password = Password.dirty(event.password);
     emit(
       state.copyWith(
@@ -177,6 +192,40 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
             [state.email, state.workSpace, state.firstName, state.lastName]),
       ),
     );
+  }
+
+  Future<void> _onIsTenantAvailable(
+    Emitter<SignUpState> emit,
+  ) async {
+    emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
+    try {
+      final response = await isTenantAvailableUseCase.call(TenantRequest(tenancyName: state.workSpace.value));
+      response.fold((l) {
+        emit(state.copyWith(status: FormzSubmissionStatus.failure));
+      }, (r) {
+        emit(state.copyWith(status: FormzSubmissionStatus.success));
+      });
+    } catch (_) {
+      emit(state.copyWith(status: FormzSubmissionStatus.failure));
+    }
+  }
+
+  Future<void> _onPasswordValidation(
+    Emitter<SignUpState> emit,
+  ) async {
+    emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
+    try {
+      final response = await passwordValidation
+          .call(PasswordRequest(password: state.password.value));
+      response.fold((l) {
+        emit(state.copyWith(status: FormzSubmissionStatus.failure));
+      }, (r) {
+        emit(state.copyWith(status: FormzSubmissionStatus.success));
+        //  r.result.setting.
+      });
+    } catch (_) {
+      emit(state.copyWith(status: FormzSubmissionStatus.failure));
+    }
   }
 
   Future<void> _onSubmitted(

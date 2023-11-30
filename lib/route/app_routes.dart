@@ -1,3 +1,4 @@
+import 'package:clean_architecture_flutter/features/auth/auth_checker/presentation/page/SplashScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../features/Home/presentation/pages/home_screen.dart';
@@ -8,6 +9,7 @@ import '../features/auth/signup/presentation/page/sign_up_third_page.dart';
 
 class AppRoutes {
   static const home = 'home';
+  static const splash = 'splash';
   static const loginPage = 'loginPage';
   static const signUpPage = 'signupPage';
   static const signUpFirstPage = 'signupFirstPage';
@@ -28,13 +30,21 @@ class AppRoutes {
   }
 
   static final GoRouter router = GoRouter(
-    initialLocation: '/signUp',
+    initialLocation: '/splash',
     navigatorKey: GlobalKey<NavigatorState>(),
     errorBuilder: (BuildContext context, GoRouterState state) {
       return SignUpPage();
     },
 
     routes: [
+      GoRoute(
+        name: splash,
+        path: '/splash',
+        builder: (context, state) => SplashScreen(),
+        pageBuilder: (context, state) {
+          return animatedPage(context, state, SplashScreen());
+        },
+      ),
       GoRoute(
         name: home,
         path: '/',

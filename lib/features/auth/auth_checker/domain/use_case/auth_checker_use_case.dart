@@ -1,13 +1,13 @@
 import 'package:dartz/dartz.dart';
 import '../../../../../core/usecases/usecase.dart';
-import '../entities/courses.dart';
-import '../repository/courses_repo.dart';
+import '../entities/user_checker.dart';
+import '../repository/auth_checker_repo.dart';
 
-class CoursesUseCase extends UseCase<Courses, NoParams> {
-  final CoursesRepository coursesRepository;
+class AuthCheckerUseCase extends UseCase<UserChecker, NoParams> {
+  final AuthCheckerRepository authCheckerRepository;
 
-  CoursesUseCase(this.coursesRepository);
+  AuthCheckerUseCase(this.authCheckerRepository);
   @override
-  Future<Either<dynamic, Courses>> call(param) async =>
-      await coursesRepository.getCourses();
+  Future<Either<dynamic, UserChecker>> call(param) async =>
+      await authCheckerRepository.userChecker();
 }

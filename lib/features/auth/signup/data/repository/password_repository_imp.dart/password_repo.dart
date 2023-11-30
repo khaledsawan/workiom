@@ -1,34 +1,28 @@
+import 'package:clean_architecture_flutter/features/auth/signup/data/model/request/password/password_request.dart';
 import 'package:dartz/dartz.dart';
-
-
 import '../../../../../../constant/url/app_api_url.dart';
 import '../../../../../../core/base/base_repo.dart';
-import '../../../domain/repository/signup_repository.dart';
-import '../../model/request/signup/signup_request.dart';
-import '../../model/response/signup/signup_response_model.dart';
+import '../../../domain/repository/password_validation_repository.dart';
+import '../../model/response/password/password_response_model.dart';
 
-class SignUpRepositoryImp extends MainRepository implements SignUpRepository {
-  SignUpRepositoryImp({
+class PasswordRepositoryImp extends MainRepository
+    implements PasswordValidationsRepository {
+  PasswordRepositoryImp({
     required super.remoteData,
     required super.localData,
     required super.networkInfo,
   });
 
   @override
-  Future<Either<dynamic, AuthResponseModel>> signUpUser(
-      SignUpRequest signRequest) async {
+  Future<Either<dynamic, PasswordResponseModel>> passwordChecker(
+      PasswordRequest passwordRequest) async {
     final result = await data(
-      getData: () => remoteData.post(
-        body: signRequest.formData(),
-        path: AppApiUrl.SIGNUP_URL,
+      getData: () => remoteData.get(
+        path: AppApiUrl.GET_PASSWORD_COMPLEXITY_SETTING_URL,
         headers: headerNoToken(),
-        model: AuthResponseModel(),
+        model: PasswordResponseModel(),
       ),
-      needCash: true,
-      cashData: (data) {
-        localData.saveAString(data.token, AppApiUrl.TOKEN);
-        localData.saveAString(data.role, AppApiUrl.ROLE);
-      },
+      needCash: false,
     );
     return result.fold(
       (failure) {

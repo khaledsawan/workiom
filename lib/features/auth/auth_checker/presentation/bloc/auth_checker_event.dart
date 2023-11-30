@@ -1,4 +1,12 @@
 part of 'auth_checker_bloc.dart';
 
-@immutable
-abstract class AuthCheckerEvent {}
+abstract class AuthCheckerEvent extends Equatable {
+  const AuthCheckerEvent();
+
+  @override
+  List<Object> get props => [];
+}
+
+class CheckAuthChecker extends AuthCheckerEvent {
+  const CheckAuthChecker() : super();
+}

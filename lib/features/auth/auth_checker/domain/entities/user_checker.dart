@@ -1,52 +1,70 @@
-class UserCheckerModel {
-  Result result;
-  dynamic targetUrl;
-  bool success;
-  dynamic error;
-  bool unAuthorizedRequest;
-  bool abp;
+import '../../../../../core/base/base_model.dart';
 
-  UserCheckerModel({
-    required this.result,
-    required this.targetUrl,
-    required this.success,
-    required this.error,
-    required this.unAuthorizedRequest,
-    required this.abp,
-  });
+class UserChecker extends BaseModel{
+  Result? result;
+  Null? targetUrl;
+  bool? success;
+  Null? error;
+  bool? unAuthorizedRequest;
+  bool? bAbp;
 
-  factory UserCheckerModel.fromJson(Map<String, dynamic> json) {
-    return UserCheckerModel(
-      result: Result.fromJson(json['result']),
-      targetUrl: json['targetUrl'],
-      success: json['success'],
-      error: json['error'],
-      unAuthorizedRequest: json['unAuthorizedRequest'],
-      abp: json['__abp'],
-    );
+  UserChecker({this.result, this.targetUrl, this.success, this.error, this.unAuthorizedRequest, this.bAbp});
+
+  UserChecker.fromJson(Map<String, dynamic> json) {
+    result = json['result'] != null ? new Result.fromJson(json['result']) : null;
+    targetUrl = json['targetUrl'];
+    success = json['success'];
+    error = json['error'];
+    unAuthorizedRequest = json['unAuthorizedRequest'];
+    bAbp = json['__abp'];
   }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.result != null) {
+      data['result'] = this.result!.toJson();
+    }
+    data['targetUrl'] = this.targetUrl;
+    data['success'] = this.success;
+    data['error'] = this.error;
+    data['unAuthorizedRequest'] = this.unAuthorizedRequest;
+    data['__abp'] = this.bAbp;
+    return data;
+  }
+
+  @override
+  fromJson(Map<String, dynamic> json) {
+   return UserChecker.fromJson(json);
+  }
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [];
 }
 
 class Result {
   User? user;
   Tenant? tenant;
-  Application application;
+  Application? application;
 
-  Result({
-    required this.user,
-    required this.tenant,
-    required this.application,
-  });
+  Result({this.user, this.tenant, this.application});
 
-  factory Result.fromJson(Map<String, dynamic> json) {
-    return Result(
-      user: json['user'] != null ? User.fromJson(json['user']) : null,
-      tenant: json['tenant'] != null ? Tenant.fromJson(json['tenant']) : null,
-      application: Application.fromJson(json['application']),
-    );
+  Result.fromJson(Map<String, dynamic> json) {
+    user: json['user'] != null ? User.fromJson(json['user']!) : null;
+    tenant: json['tenant'] != null ? Tenant.fromJson(json['tenant']!) : null;
+    application = json['application'] != null ? new Application.fromJson(json['application']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['user'] = this.user;
+    data['tenant'] = this.tenant;
+    if (this.application != null) {
+      data['application'] = this.application!.toJson();
+    }
+    return data;
   }
 }
-
 class User {
   // Add properties if user details are provided
   User(); // Add a constructor if needed
@@ -64,38 +82,55 @@ class Tenant {
     return Tenant();
   }
 }
-
 class Application {
-  String version;
-  String releaseDate;
-  String currency;
-  String currencySign;
-  bool userDelegationIsEnabled;
-  Map<String, dynamic> features;
-  String compatibleMobileClientVersion;
-  String compatibleWebClientVersion;
+  String? version;
+  String? releaseDate;
+  String? currency;
+  String? currencySign;
+  bool? userDelegationIsEnabled;
+  Features? features;
+  String? compatibleMobileClientVersion;
+  String? compatibleWebClientVersion;
 
-  Application({
-    required this.version,
-    required this.releaseDate,
-    required this.currency,
-    required this.currencySign,
-    required this.userDelegationIsEnabled,
-    required this.features,
-    required this.compatibleMobileClientVersion,
-    required this.compatibleWebClientVersion,
-  });
+  Application({this.version, this.releaseDate, this.currency, this.currencySign, this.userDelegationIsEnabled, this.features, this.compatibleMobileClientVersion, this.compatibleWebClientVersion});
 
-  factory Application.fromJson(Map<String, dynamic> json) {
-    return Application(
-      version: json['version'],
-      releaseDate: json['releaseDate'],
-      currency: json['currency'],
-      currencySign: json['currencySign'],
-      userDelegationIsEnabled: json['userDelegationIsEnabled'],
-      features: json['features'],
-      compatibleMobileClientVersion: json['compatibleMobileClientVersion'],
-      compatibleWebClientVersion: json['compatibleWebClientVersion'],
-    );
+  Application.fromJson(Map<String, dynamic> json) {
+    version = json['version'];
+    releaseDate = json['releaseDate'];
+    currency = json['currency'];
+    currencySign = json['currencySign'];
+    userDelegationIsEnabled = json['userDelegationIsEnabled'];
+    features = json['features'] != null ? new Features.fromJson(json['features']) : null;
+    compatibleMobileClientVersion = json['compatibleMobileClientVersion'];
+    compatibleWebClientVersion = json['compatibleWebClientVersion'];
   }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['version'] = this.version;
+    data['releaseDate'] = this.releaseDate;
+    data['currency'] = this.currency;
+    data['currencySign'] = this.currencySign;
+    data['userDelegationIsEnabled'] = this.userDelegationIsEnabled;
+    if (this.features != null) {
+      data['features'] = this.features!.toJson();
+    }
+    data['compatibleMobileClientVersion'] = this.compatibleMobileClientVersion;
+    data['compatibleWebClientVersion'] = this.compatibleWebClientVersion;
+    return data;
+  }
+}
+
+class Features {
+
+
+  Features();
+
+Features.fromJson(Map<String, dynamic> json) {
+}
+
+Map<String, dynamic> toJson() {
+final Map<String, dynamic> data = new Map<String, dynamic>();
+return data;
+}
 }

@@ -1,18 +1,18 @@
 import 'package:dartz/dartz.dart';
 
 import '../../../../../core/usecases/usecase.dart';
-import '../../data/model/request/signup/signup_request.dart';
-import '../../data/model/response/signup/signup_response_model.dart';
-import '../repository/signup_repository.dart';
+import '../../data/model/request/password/password_request.dart';
+import '../../data/model/response/password/password_response_model.dart';
+import '../repository/password_validation_repository.dart';
 
-class SignUpUseCase extends UseCase<AuthResponseModel,SignUpRequest> {
-  final SignUpRepository signUpRepository;
+class PasswordValidationUseCase extends UseCase<PasswordResponseModel,PasswordRequest> {
+  final PasswordValidationsRepository passwordValidationsRepository;
 
-  SignUpUseCase(this.signUpRepository);
+  PasswordValidationUseCase(this.passwordValidationsRepository);
 
   @override
-  Future<Either<dynamic,AuthResponseModel>> call(params) {
-    return signUpRepository.signUpUser(params) ;
+  Future<Either<dynamic,PasswordResponseModel>> call(params) {
+    return passwordValidationsRepository.passwordChecker(params) ;
   }
 }
 
